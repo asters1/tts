@@ -13,7 +13,7 @@ import (
 )
 
 func GetToken() string {
-	res := tools.RequestClient("https://all.wisteria.cf/azure.microsoft.com/en-gb/services/cognitive-services/text-to-speech/", "get", "", "")
+	res := tools.RequestClient("https://azure.microsoft.com/en-gb/services/cognitive-services/text-to-speech/", "get", "", "")
 	token := tools.Re(res, `token: \"(.*?)\"`)[1]
 	return token
 
