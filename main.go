@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 	"time"
 
@@ -30,16 +32,6 @@ func GetLocalTime() string {
 
 func main() {
 	config, _ := tools.GetConfig("./tts.config")
-	text := `
-此文件夹用于储存音频文件!
-	`
-	SSML := `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-        <voice name="` + config["Language"] + `-` + config["Name"] + `">
-            <mstts:express-as style="general" >
-                <prosody rate="` + config["rate"] + `%" volume="` + config["volume"] + `" pitch="` + config["pitch"] + `%">` + text + `</prosody>
-            </mstts:express-as>
-        </voice>
-    </speak>`
 	fmt.Println("获取uuid...")
 	uuid := tools.GetUUID()
 	fmt.Println("获取token...")
@@ -63,30 +55,48 @@ func main() {
 
 	m1 := "Path: speech.config\r\nX-RequestId: " + uuid + "\r\nX-Timestamp: " + GetISOTime() + "\r\nContent-Type: application/json\r\n\r\n{\"context\":{\"system\":{\"name\":\"SpeechSDK\",\"version\":\"1.19.0\",\"build\":\"JavaScript\",\"lang\":\"JavaScript\",\"os\":{\"platform\":\"Browser/Linux x86_64\",\"name\":\"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0\",\"version\":\"5.0 (X11)\"}}}}"
 	m2 := "Path: synthesis.context\r\nX-RequestId: " + uuid + "\r\nX-Timestamp: " + GetISOTime() + "\r\nContent-Type: application/json\r\n\r\n{\"synthesis\":{\"audio\":{\"metadataOptions\":{\"sentenceBoundaryEnabled\":false,\"wordBoundaryEnabled\":false},\"outputFormat\":\"audio-24khz-160kbitrate-mono-mp3\"}}}"
-	m3 := "Path: ssml\r\nX-RequestId: " + uuid + "\r\nX-Timestamp: " + GetISOTime() + "\r\nContent-Type: application/ssml+xml\r\n\r\n" + SSML
 	conn.WriteMessage(websocket.TextMessage, []byte(m1))
 	conn.WriteMessage(websocket.TextMessage, []byte(m2))
-	conn.WriteMessage(websocket.TextMessage, []byte(m3))
-
-	var Adata []byte
-	fmt.Println("正在下载文件...")
 	for {
-		Num, message, err := conn.ReadMessage()
-		if err != nil {
-			fmt.Println(err)
+		fmt.Println("请输入文本内容:(退出请输入q,然后回车)")
+		readers := bufio.NewReader(os.Stdin)
+
+		text, _, _ := readers.ReadLine()
+		if string(text) == "q" {
 			break
 		}
-		if Num == 2 {
-			index := strings.Index(string(message), "Path:audio")
+		SSML := `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+        <voice name="` + config["Language"] + `-` + config["Name"] + `">
+            <mstts:express-as style="general" >
+                <prosody rate="` + config["rate"] + `%" volume="` + config["volume"] + `" pitch="` + config["pitch"] + `%">` + string(text) + `</prosody>
+            </mstts:express-as>
+        </voice>
+    </speak>`
+		m3 := "Path: ssml\r\nX-RequestId: " + tools.GetUUID() + "\r\nX-Timestamp: " + GetISOTime() + "\r\nContent-Type: application/ssml+xml\r\n\r\n" + SSML
+		conn.WriteMessage(websocket.TextMessage, []byte(m3))
 
-			data := []byte(string(message)[index+12:])
-			Adata = append(Adata, data...)
-		} else if Num == 1 && string(message)[len(string(message))-14:len(string(message))-6] == "turn.end" {
-			fmt.Println("已完成")
-			break
+		var Adata []byte
+		fmt.Println("正在下载文件...")
+		for {
+			Num, message, err := conn.ReadMessage()
+			time.Sleep(time.Second)
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+			if Num == 2 {
+				index := strings.Index(string(message), "Path:audio")
+
+				data := []byte(string(message)[index+12:])
+				Adata = append(Adata, data...)
+			} else if Num == 1 && string(message)[len(string(message))-14:len(string(message))-6] == "turn.end" {
+				fmt.Println("已完成")
+				break
+			}
+
 		}
-
+		Adata = Adata[:len(Adata)-2400]
+		fmt.Println("文件存放路径为:" + config["path"] + config["Language"] + "-" + config["Name"] + "-" + GetLocalTime() + ".mp3")
+		ioutil.WriteFile(config["path"]+config["Language"]+"-"+config["Name"]+"-"+GetLocalTime()+".mp3", Adata, 0666)
 	}
-	Adata = Adata[:len(Adata)-2400]
-	ioutil.WriteFile("./mp3/"+config["Language"]+"-"+config["Name"]+"-"+GetLocalTime()+".mp3", Adata, 0666)
 }
