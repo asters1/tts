@@ -1,4 +1,4 @@
-module web
+module tts
 
 go 1.18
 
