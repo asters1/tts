@@ -79,7 +79,6 @@ func main() {
 		fmt.Println("正在下载文件...")
 		for {
 			Num, message, err := conn.ReadMessage()
-			time.Sleep(time.Second)
 			if err != nil {
 				fmt.Println(err)
 				break
