@@ -37,7 +37,7 @@ mac
 https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_mac_amd64
 ```
 
-3. tts.config(需要将此文件放置到tts同一目录下)
+3. tts.config(需要将此文件放置到tts同一目录下,并且新建一个名字为mp3的文件夹。否则会报错!!)
 
 ```
 #此配置文件以#号作为注释
