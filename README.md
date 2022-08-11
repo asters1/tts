@@ -59,7 +59,7 @@ Language:zh-CN
 #XiaoxiaoNeural     #晓晓
 #XiaoyouNeural      #晓悠
 Name:YunxiNeural    #云希
-#-SC-YunxiNeural    #云希
+#-SC-YunxiNeural    #四川云希
 #
 
 #volume为音量,默认为100,区间[0，100]
