@@ -16,20 +16,25 @@ go run main.go
 
 安卓高级终端:
 ```
-https://github.com/asters1/tts/releases/download/v0.1.2/tts_android_termux
+https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_termux_arm64
 ```
 windowns
 ```
-https://github.com/asters1/tts/releases/download/v0.1.2/tts_windowns_amd64.exe
+https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_windowns_amd64.exe
+
 ```
 
 linux-amd64
 ```
-https://github.com/asters1/tts/releases/download/v0.1.2/tts_linux_amd64
+https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_linux_amd64
 ```
 linux-arm64
 ```
-https://github.com/asters1/tts/releases/download/v0.1.2/tts_linux_arm64
+https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_termux_arm64
+```
+mac
+```
+https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_mac_amd64
 ```
 
 3. tts.config(需要将此文件放置到tts同一目录下)
@@ -47,7 +52,7 @@ Language:zh-CN
 #Name:XiaoxiaoNeural
 #XiaoxiaoNeural     #晓晓
 #XiaoyouNeural      #晓悠
-Name:YunxiNeural        #云希
+Name:YunxiNeural    #云希
 #-SC-YunxiNeural    #云希
 #
 
