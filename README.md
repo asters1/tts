@@ -39,6 +39,7 @@ https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_mac_amd64
 
 3. tts.config(需要将此文件放置到tts同一目录下,并且新建一个名字为mp3的文件夹。否则会报错!!)
 
+
 ```
 #此配置文件以#号作为注释
 #
@@ -49,6 +50,11 @@ https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_mac_amd64
 Language:zh-CN
 
 #Name为发音员,默认为XiaoxiaoNeural
+
+#发音员不止以下几个，懒得写了。自己找，网址为:
+#https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#overview
+
+
 #Name:XiaoxiaoNeural
 #XiaoxiaoNeural     #晓晓
 #XiaoyouNeural      #晓悠
