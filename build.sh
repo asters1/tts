@@ -13,7 +13,8 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./release/${tts_tag}_linux_amd
 echo "正在编译${tts_tag}_linux_arm64"
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o ./release/${tts_tag}_linux_arm64
 echo "正在编译${tts_tag}_linux_amd64"
-CGO_ENABLED=0 GOOS=android GOARCH=arm64 go build -o ./release/${tts_tag}_termux_arm64
+go build -o ./release/${tts_tag}_termux_arm64
+
 git add ./release/*
 git commit -m "${tts_tag}"
 git push origin master
