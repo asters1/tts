@@ -16,25 +16,25 @@ go run main.go
 
 安卓高级终端:
 ```
-https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_termux_arm64
+https://github.com/asters1/tts/releases/download/tts_v0.1.5/tts_v0.1.5_termux_arm64
 ```
 windowns
 ```
-https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_windowns_amd64.exe
+https://github.com/asters1/tts/releases/download/tts_v0.1.5/tts_v0.1.5_windowns_amd64.exe
 
 ```
 
 linux-amd64
 ```
-https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_linux_amd64
+https://github.com/asters1/tts/releases/download/tts_v0.1.5/tts_v0.1.5_linux_amd64
 ```
 linux-arm64
 ```
-https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_termux_arm64
+https://github.com/asters1/tts/releases/download/tts_v0.1.5/tts_v0.1.5_termux_arm64
 ```
 mac
 ```
-https://github.com/asters1/tts/releases/download/tts_v0.1.4/tts_v0.1.4_mac_amd64
+https://github.com/asters1/tts/releases/download/tts_v0.1.5/tts_v0.1.5_mac_amd64
 ```
 
 3. tts.config(需要将此文件放置到tts同一目录下,并且新建一个名字为mp3的文件夹。否则会报错!!)
