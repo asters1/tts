@@ -18,6 +18,7 @@ git add ./release/*
 git commit -m "${tts_tag}"
 git push origin master
 git add ./*
+git commit -m "${tts_tag}"
 git push origin master
 
 
