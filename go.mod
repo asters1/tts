@@ -3,7 +3,7 @@ module tts
 go 1.18
 
 require (
-	github.com/asters1/tools v0.1.4
+	github.com/asters1/tools v0.1.5
 	github.com/gorilla/websocket v1.5.0
 )
 
