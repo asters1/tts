@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -89,6 +90,6 @@ func main() {
 		}
 		Adata = Adata[:len(Adata)-2400]
 		fmt.Println("文件存放路径为:" + config["path"] + config["Language"] + "-" + config["Name"] + "-" + GetLocalTime() + ".mp3")
-		ioutil.WriteFile(config["path"]+config["Language"]+"-"+config["Name"]+"-"+GetLocalTime()+".mp3", Adata, 0666)
+		ioutil.WriteFile(config["path"]+config["Language"]+"-"+config["Name"]+"-"+strconv.Itoa(int(time.Now().Unix()))+".mp3", Adata, 0666)
 	}
 }
