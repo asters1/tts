@@ -12,12 +12,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-func GetToken() string {
-	res := tools.RequestClient("https://azure.microsoft.com/en-gb/services/cognitive-services/text-to-speech/", "get", "", "")
-	token := tools.Re(res, `token: \"(.*?)\"`)[1]
-	return token
-
-}
 func GetISOTime() string {
 	T := time.Now().String()
 	return T[:23][:10] + "T" + T[:23][11:] + "Z"
@@ -34,10 +28,9 @@ func main() {
 	config, _ := tools.GetConfig("./tts.config")
 	fmt.Println("获取uuid...")
 	uuid := tools.GetUUID()
-	fmt.Println("获取token...")
 
-	token := GetToken()
-	WssUrl := `wss://eastus.tts.speech.microsoft.com/cognitiveservices/websocket/v1?Authorization=` + token + `&X-ConnectionId=` + uuid
+	WssUrl := `wss://wisteria.cf/eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TricType=AzureDemo&Authorization=bearer%20undefined&X-ConnectionId=` + uuid
+
 	dl := websocket.Dialer{
 		EnableCompression: true,
 	}
