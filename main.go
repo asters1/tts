@@ -30,7 +30,7 @@ func main() {
 	fmt.Println("获取uuid...")
 	uuid := tools.GetUUID()
 
-	WssUrl := `wss://wisteria.cf/eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TricType=AzureDemo&Authorization=bearer%20undefined&X-ConnectionId=` + uuid
+	WssUrl := `wss://eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TricType=AzureDemo&Authorization=bearer%20undefined&X-ConnectionId=` + uuid
 
 	dl := websocket.Dialer{
 		EnableCompression: true,
